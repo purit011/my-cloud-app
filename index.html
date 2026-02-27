@@ -1,19 +1,61 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My First Cloud App</title>
-    <style>
-        body.github-black {
-  color: #181717;
-}
+(function() {
+    // Pre-defined high-quality theme (Tokyo Night Purple)
+    const config = {
+        bg: '#1a1b26',        // Main background
+        header: '#16161e',    // Header background
+        text: '#a9b1d6',      // Main text
+        link: '#7aa2f7',      // Links and blue accents
+        border: '#414868',    // Border lines
+        accent: '#bb9af7',    // Primary buttons and highlights
+        card: '#24283b'       // Repository cards and boxes
+    };
 
-.github-dark-bg {
-  background-color: #0D1117;
-}
-    </style>
-</head>
-<body>
-    <h1>Hello World!</h1>
-    <p>This application was deployed to the cloud by an IT student.</p>
-</body>
-</html>
+    const css = `
+        :root, [data-color-mode="dark"] {
+            --color-canvas-default: ${config.bg} !important;
+            --color-canvas-subtle: ${config.header} !important;
+            --color-canvas-overlay: ${config.card} !important;
+            --color-fg-default: ${config.text} !important;
+            --color-fg-muted: #787c99 !important;
+            --color-accent-fg: ${config.link} !important;
+            --color-border-default: ${config.border} !important;
+            --color-border-muted: ${config.border} !important;
+            --color-btn-bg: ${config.card} !important;
+            --color-btn-primary-bg: ${config.accent} !important;
+            --color-btn-primary-border: ${config.accent} !important;
+            --color-header-bg: ${config.header} !important;
+            --color-side-nav-bg-selected: ${config.card} !important;
+        }
+
+        body { 
+            background-color: ${config.bg} !important; 
+            color: ${config.text} !important; 
+        }
+
+        /* UI Elements Styling */
+        .Header { background-color: ${config.header} !important; border-bottom: 1px solid ${config.border} !important; }
+        .Box { background-color: ${config.card} !important; border-color: ${config.border} !important; }
+        .TimelineItem-badge { background-color: ${config.card} !important; border-color: ${config.border} !important; }
+        .btn-primary { background-color: ${config.accent} !important; border-color: ${config.accent} !important; color: #1a1b26 !important; font-weight: bold !important; }
+        
+        /* Progress bars and activity graphs */
+        .ContributionCalendar-day { border-radius: 2px !important; }
+        rect.ContributionCalendar-day[data-level="0"] { fill: ${config.header} !important; }
+        
+        /* Markdown/Readme area */
+        .markdown-body { color: ${config.text} !important; }
+        .markdown-body code { background-color: ${config.header} !important; }
+    `;
+
+    const style = document.createElement('style');
+    style.id = 'github-instant-theme';
+    style.innerHTML = css;
+    
+    // Remove previous instance if exists
+    const oldStyle = document.getElementById('github-instant-theme');
+    if (oldStyle) oldStyle.remove();
+    
+    document.head.appendChild(style);
+
+    console.log("%c ✅ GitHub Theme Applied Successfully! ", "background: #bb9af7; color: #1a1b26; font-weight: bold; padding: 5px; border-radius: 3px;");
+})();
